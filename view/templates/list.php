@@ -1,16 +1,16 @@
 <?php ob_start() ?>
 
 <h2>Список постов</h2>
-	<ul>  <?php foreach ($posts as $post): ?>
+	<ol>  <?php foreach ($posts as $post): ?>
 		<li>
-		<a href="index.php?id=<?php echo $post['id']; ?>">
+		<a href="./index.php/show?id=<?php echo $post['id']; ?>">
 
-				<?php echo $post['id']. ' . ' .$post['title']; ?>
+				<?php echo $post['title'];?>
 			</a>
 		</li>
 	<?php endforeach ?>
-	</ul>
+	</ol>
 
-<?php $content = ob_get_clean(); ?>
+<?php $content = ob_get_clean();?>
 
 <?php include "view/templates/layout.php";
