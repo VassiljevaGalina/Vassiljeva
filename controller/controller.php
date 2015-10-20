@@ -11,28 +11,47 @@
 *Погружает файл list.php,содержащий вид вывода
 *информации из $posts в браузере.
 **/
+function render_template($path, array $args)//функция, кот. оборачивает данные ($args) в html ($path)
+{
+	extract($args);
+	ob_start();
+	require $path;
+	$html=ob_get_clean();
+	return $html;	
+}
+
+
 function list_action()
 {
 	echo '<br><br><a href="./index.php/admin">Админка</a> | <a href="./index.php/autor">Автор</a>';
+
 	$posts=get_all_posts();
-	require "view/templates/list.php";
+	$html=render_template('view/templates/list.php',array('posts'=>$posts));
+	return $html;	
+	//require "view/templates/list.php";
 }
 function show_action($id)
 {	
 	$post=get_post($id);
-	require "view/templates/show.php";
+	$html=render_template('view/templates/show.php',array('post'=>$post));
+	return $html;
+	//require "view/templates/show.php";
 }
 function autor_action()
 {	
-	require "view/templates/autor.php";
+	$html=render_template('view/templates/autor.php',array());
+	return $html;
+	//require "view/templates/autor.php";
 }
 function admin_action()
-{
-	if (isset($_POST['submit']) && !empty($_POST['add_title']))
+{	
+	if (isset($_POST['submit']))
 	{
-		$sql = add_post();
+		add_post();
 	}
 	$posts=get_all_posts();
-	require "view/templates/admin.php";
+	$html=render_template('view/templates/admin.php',array('posts'=>$posts));
+	return $html;
+	//require "view/templates/admin.php";
 }
 ?>

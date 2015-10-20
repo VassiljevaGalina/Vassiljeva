@@ -39,4 +39,4 @@
 
 <?php $content=ob_get_clean(); ?>
 
-<?php include "view/templates/layout.php";
+<?php include "view/templates/layout.php";?>
